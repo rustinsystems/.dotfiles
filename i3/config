@@ -1,0 +1,159 @@
+# ~/.config/i3/config
+# -----------------------------------------------------
+# i3 Config based on Hyprland User Keybinds
+# -----------------------------------------------------
+
+# SUPER KEY (Mod4 is Super/Windows key, Mod1 is Alt)
+set $mod Mod4
+
+# Font
+font pango:monospace 10
+
+# -----------------------------------------------------
+# KEY BINDINGS
+# -----------------------------------------------------
+
+# --- Applications ---
+# Open Terminal (Using your script, assuming it launches a kit/alacritty/etc)
+bindsym $mod+q exec --no-startup-id ~/.config/ml4w/settings/terminal.sh
+# Open Browser
+bindsym $mod+f exec --no-startup-id ~/.config/ml4w/settings/browser.sh
+# Open File Manager
+bindsym $mod+e exec --no-startup-id ~/.config/ml4w/settings/filemanager.sh
+# Open Yazi (needs a terminal wrapper in i3)
+bindsym $mod+y exec --no-startup-id kitty -e yazi
+# Emoji Picker (Ensure this script works in X11, otherwise install 'rofimoji')
+bindsym $mod+Ctrl+e exec --no-startup-id ~/.config/ml4w/settings/emojipicker.sh
+# Calculator
+bindsym $mod+Ctrl+c exec --no-startup-id ~/.config/ml4w/settings/calculator.sh
+
+# --- Window Management ---
+# [cite_start]Kill active window [cite: 3]
+bindsym $mod+c kill
+# Kill window and all instances (Simulated with standard kill for now)
+bindsym $mod+Shift+c kill
+
+# [cite_start]Fullscreen [cite: 5]
+bindsym $mod+Ctrl+f fullscreen toggle
+# Maximize (i3 doesn't distinguish max/full, so we map both to fullscreen)
+bindsym $mod+Ctrl+m fullscreen toggle
+
+# [cite_start]Float/Tile Toggle [cite: 6]
+bindsym $mod+t floating toggle
+# [cite_start]Toggle Split (Horizontal/Vertical) [cite: 7]
+bindsym $mod+j layout toggle split
+
+# [cite_start]Focus (Vim keys) [cite: 14, 15]
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# [cite_start]Move Window [cite: 14, 15]
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Resize Window (i3 uses a mode for this, but here are direct binds)
+bindsym $mod+Shift+Right resize grow width 10 px or 10 ppt
+bindsym $mod+Shift+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+Up resize shrink height 10 px or 10 ppt
+
+# Swap Windows (closest i3 equivalent is moving)
+bindsym $mod+Mod1+Left move left
+bindsym $mod+Mod1+Right move right
+bindsym $mod+Mod1+Up move up
+bindsym $mod+Mod1+Down move down
+
+# [cite_start]Tab cycling (Alt+Tab) [cite: 24]
+bindsym Mod1+Tab focus right
+
+# --- Actions ---
+# [cite_start]Reload Config [cite: 25]
+bindsym $mod+Ctrl+r reload
+# Restart i3 (inplace)
+bindsym $mod+Shift+r restart
+
+# [cite_start]Screenshot (Replaced Hyprland script with Flameshot for X11) [cite: 26]
+bindsym $mod+Print exec --no-startup-id flameshot gui
+bindsym $mod+Shift+s exec --no-startup-id flameshot gui
+
+# [cite_start]Wallpaper (Using feh) [cite: 27]
+bindsym $mod+w exec --no-startup-id feh --bg-fill --randomize ~/Pictures/Wallpapers/*
+
+# [cite_start]Launcher (Rofi) [cite: 29]
+bindsym $mod+space exec --no-startup-id "pkill rofi || rofi -show drun -replace -i"
+
+# Clipboard (Ensure you have clipmenu or rofi-greenclip installed for X11)
+bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard
+
+# [cite_start]Lock Screen (Using i3lock) [cite: 33]
+bindsym $mod+Ctrl+l exec --no-startup-id i3lock -c 000000
+
+# --- Workspaces ---
+# Switch to workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+# Move window to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+10 move container to workspace number 10
+
+# Workspace Cycling
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
+
+# --- Fn Keys (Audio/Brightness) ---
+[cite_start]# [cite: 38, 40]
+bindsym XF86MonBrightnessUp exec brightnessctl s +10%
+bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86Calculator exec ~/.config/ml4w/settings/calculator.sh
+
+# --- Mouse Floating ---
+# Drag windows with Super + Left Mouse Button
+floating_modifier $mod
+
+# -----------------------------------------------------
+# STARTUP & HARDWARE
+# -----------------------------------------------------
+
+# Start the Status Bar (i3status)
+bar {
+        status_command i3status
+        position top
+}
+
+# Background/Wallpaper
+exec_always --no-startup-id feh --bg-fill ~/Pictures/wallpapers/current.jpg
+
+# Compositor (for transparency/fade effects - optional)
+exec --no-startup-id picom -b
+
+# --- Display Mirroring Logic ---
+# This script runs on startup/reload to check for HDMI and mirror it
+exec_always --no-startup-id ~/.config/i3/scripts/monitor_mirror.sh
