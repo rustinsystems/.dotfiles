@@ -55,11 +55,11 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# Resize Window (i3 uses a mode for this, but here are direct binds)
-bindsym $mod+Shift+Right resize grow width 10 px or 10 ppt
-bindsym $mod+Shift+Left resize shrink width 10 px or 10 ppt
-bindsym $mod+Shift+Down resize grow height 10 px or 10 ppt
-bindsym $mod+Shift+Up resize shrink height 10 px or 10 ppt
+# Resize Window
+bindsym $mod+Shift+Right resize grow width 10 px
+bindsym $mod+Shift+Left resize shrink width 10 px
+bindsym $mod+Shift+Down resize grow height 10 px
+bindsym $mod+Shift+Up resize shrink height 10 px
 
 # Swap Windows (closest i3 equivalent is moving)
 bindsym $mod+Mod1+Left move left
@@ -121,15 +121,14 @@ bindsym $mod+Shift+10 move container to workspace number 10
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
-# --- Fn Keys (Audio/Brightness) ---
-[cite_start]# [cite: 38, 40]
-bindsym XF86MonBrightnessUp exec brightnessctl s +10%
-bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+# Fn Keys (Audio/Brightness)
+bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPlay exec /usr/bin/playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Calculator exec ~/.config/ml4w/settings/calculator.sh
