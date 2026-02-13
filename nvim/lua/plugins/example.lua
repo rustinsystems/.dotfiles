@@ -184,7 +184,8 @@ return {
 
   -- add any tools you want to have installed below
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
+    -- The Mason Configuration is now stored at the Mason-org repo instead of WilliamBoman's account, PS: Confirm
     opts = {
       ensure_installed = {
         "stylua",
